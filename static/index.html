@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#1b1e1c">
+  <title>BoardNet — Jogos de tabuleiro online</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner"><div class="brand"><span class="brand-mark">BN</span><span>BoardNet</span></div>
+  <span class="header-label">Jogos online entre amigos</span></div>
+</header>
+<main class="page">
+<section id="home" aria-labelledby="home-title">
+  <div class="welcome"><div class="overline">PARTIDAS PRIVADAS</div><h1 id="home-title">Uma mesa, três jogos.</h1><p>Escolha um jogo, crie uma sala e convide um amigo pelo código. Sem cadastro.</p></div>
+  <div class="home-layout">
+    <div class="game-picker"><div class="section-heading"><h2>Escolha seu jogo</h2><span>01 / 02</span></div>
+      <div class="game-list" role="group" aria-label="Jogos disponíveis">
+        <button class="game-option is-selected" data-game="checkers" aria-pressed="true"><span class="game-symbol">⛀</span><span class="game-option-text"><strong>Dama brasileira</strong><small>Captura obrigatória · Tabuleiro 8×8</small></span><span class="game-arrow">›</span></button>
+        <button class="game-option" data-game="chess" aria-pressed="false"><span class="game-symbol">♞</span><span class="game-option-text"><strong>Xadrez</strong><small>Regras clássicas · Partidas em tempo real</small></span><span class="game-arrow">›</span></button>
+        <button class="game-option" data-game="morris" aria-pressed="false"><span class="game-symbol">◎</span><span class="game-option-text"><strong>Trilha</strong><small>Nove peças · Estratégia por posições</small></span><span class="game-arrow">›</span></button>
+      </div>
+    </div>
+    <div class="entry-panel"><div class="section-heading"><h2>Entrar na mesa</h2><span>02 / 02</span></div>
+      <label for="nickname">Seu apelido</label><input id="nickname" maxlength="24" autocomplete="nickname" placeholder="Como quer ser chamado?">
+      <label for="gamechoice">Jogo selecionado</label><select id="gamechoice"><option value="checkers">Dama brasileira</option><option value="chess">Xadrez</option><option value="morris">Trilha</option></select>
+      <button id="create" class="button-primary full" onclick="createRoom()">Criar nova sala</button>
+      <div class="entry-divider"><span>ou entre em uma existente</span></div>
+      <label for="roominput">Código da sala</label><div class="join-line"><input id="roominput" maxlength="6" autocapitalize="characters" placeholder="EX.: A1B2C3"><button id="join" class="button-secondary" onclick="joinRoom()">Entrar</button></div>
+      <p id="homeError" class="form-error" role="alert"></p>
+      <p class="entry-hint">O criador joga com as brancas; o convidado, com as pretas.</p>
+    </div>
+  </div>
+</section>
+<section id="game" class="hidden" aria-label="Sala de partida">
+  <div class="room-toolbar"><div class="room-heading"><span class="overline">PARTIDA ONLINE</span><h1 id="gametitle">Partida</h1></div><div class="room-actions"><span class="room-code-label">Sala</span><strong id="roomcode" class="roomcode"></strong><button class="button-secondary compact" onclick="copyCode()">Copiar código</button><button class="button-ghost compact" onclick="goHome()">Sair da sala</button></div></div>
+  <div class="match-layout">
+    <div class="board-column">
+      <div id="player-top" class="player-slot"></div>
+      <div id="board" class="board" aria-label="Tabuleiro de jogo"></div>
+      <div id="player-bottom" class="player-slot"></div>
+      <p id="guidance" class="guidance"></p>
+    </div>
+    <aside class="match-sidebar">
+      <div class="match-card"><div class="match-card-heading"><h2>Informações da partida</h2><span id="orientation" class="small muted">Perspectiva</span></div>
+        <div class="turn-indicator" id="turn-indicator"><span class="turn-dot"></span><strong id="status">Aguardando jogadores</strong></div>
+        <p id="moveinfo" class="match-line"></p><p id="details" class="match-line"></p>
+        <div class="connection-row"><span id="connection" class="small" role="status" aria-live="polite">Conectando...</span><button id="reconnect" class="button-secondary compact hidden" onclick="retryConnection()">Reconectar</button></div>
+        <div class="message" id="message" role="status" aria-live="polite">Selecione uma peça para ver os movimentos possíveis.</div>
+      </div>
+      <div class="match-card muted-card"><h2>Como jogar</h2><p id="rules" class="small"></p><div class="sidebar-divider"></div><p class="small muted" id="workername">Servidor: aguardando...</p><p class="small muted">As jogadas são verificadas pelo servidor e o tabuleiro se atualiza em tempo real.</p></div>
+    </aside>
+  </div>
+</section>
+<footer class="site-footer"><span>BoardNet · Projeto de Sistemas Distribuídos</span><span id="clusterstatus">Verificando servidores...</span></footer>
+</main>
+</body></html>
